@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Height Advantage - Resources for Short People</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Page Sections */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding: 3rem 2rem;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Home Page */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInDown 0.8s;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            animation: fadeInUp 0.8s;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .feature-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* Tips Page */
+        .tips-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .tip-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-left: 5px solid #667eea;
+        }
+
+        .tip-section h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .tip-section ul {
+            list-style-position: inside;
+            margin-left: 1rem;
+        }
+
+        .tip-section li {
+            margin-bottom: 0.8rem;
+            padding-left: 0.5rem;
+        }
+
+        /* Products Page */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Community Page */
+        .community-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .community-section h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .story-box {
+            background: #f8f9ff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #667eea;
+        }
+
+        .story-box h4 {
+            color: #764ba2;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contact Page */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .contact-info h3 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f8f9ff;
+            border-radius: 8px;
+        }
+
+        .info-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+            color: #667eea;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .contact-form h3 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h2 {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showPage('home')">Home</a></li>
+            <li><a href="#" onclick="showPage('tips')">Style & Tips</a></li>
+            <li><a href="#" onclick="showPage('products')">Products</a></li>
+            <li><a href="#" onclick="showPage('community')">Community</a></li>
+            <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home" class="page active">
+        <div class="container">
+            <div class="hero">
+                <h1>Height Advantage</h1>
+                <p>Empowering shorter individuals with confidence, style, and practical solutions</p>
+            </div>
+
+            <div class="features">
+                <div class="feature-card">
+                    <h3>🎨 Style Guide</h3>
+                    <p>Discover fashion tips and clothing recommendations specifically designed to enhance your appearance and boost your confidence.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🛍️ Product Recommendations</h3>
+                    <p>Find carefully curated products from clothing to everyday items that make life easier and more comfortable for shorter people.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>💪 Build Confidence</h3>
+                    <p>Learn strategies to embrace your height, overcome challenges, and develop unshakeable self-confidence in any situation.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>👥 Join Community</h3>
+                    <p>Connect with others who share similar experiences, exchange advice, and find support in our welcoming community.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🏠 Home Solutions</h3>
+                    <p>Practical modifications and tools to make your living space more accessible and comfortable for your height.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>💼 Professional Life</h3>
+                    <p>Navigate workplace dynamics with confidence and learn how to command presence regardless of your stature.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tips Page -->
+    <div id="tips" class="page">
+        <div class="container">
+            <div class="page-header">
+                <h2>Style & Practical Tips</h2>
+                <p>Look great and feel confident with these expert recommendations</p>
+            </div>
+
+            <div class="tips-grid">
+                <div class="tip-section">
+                    <h3>Fashion & Clothing</h3>
+                    <ul>
+                        <li>Opt for monochromatic outfits to create a streamlined, lengthening silhouette</li>
+                        <li>Choose fitted clothing over baggy styles to avoid being overwhelmed by fabric</li>
+                        <li>Wear vertical stripes and patterns to create the illusion of height</li>
+                        <li>Select pants with a higher rise to elongate your legs</li>
+                        <li>Avoid ankle straps on shoes as they can visually cut your leg line</li>
+                        <li>Invest in tailoring - properly fitted clothes make a huge difference</li>
+                        <li>V-necks and open collars elongate the neck and torso</li>
+                    </ul>
+                </div>
+
+                <div class="tip-section">
+                    <h3>Footwear Tips</h3>
+                    <ul>
+                        <li>Consider elevator shoes or height-increasing insoles for important occasions</li>
+                        <li>Choose shoes in nude or similar tones to your skin for leg-lengthening effect</li>
+                        <li>Pointed-toe shoes create a longer line than rounded toes</li>
+                        <li>Avoid chunky, heavy shoes that can make you appear bottom-heavy</li>
+                        <li>For women, heels are optional but can boost confidence when desired</li>
+                    </ul>
+                </div>
+
+                <div class="tip-section">
+                    <h3>Home & Daily Life</h3>
+                    <ul>
+                        <li>Install pull-down shelving systems in high cabinets</li>
+                        <li>Keep a sturdy step stool in commonly used areas like the kitchen</li>
+                        <li>Adjust your workspace ergonomically with footrests and proper chair height</li>
+                        <li>Use adjustable shower heads for comfort</li>
+                        <li>Consider furniture proportions - lower seating can make you feel more comfortable</li>
+                    </ul>
+                </div>
+
+                <div class="tip-section">
+                    <h3>Confidence Building</h3>
+                    <ul>
+                        <li>Maintain excellent posture - stand tall and walk confidently</li>
+                        <li>Make eye contact and use confident body language</li>
+                        <li>Focus on your strengths and accomplishments, not your height</li>
+                        <li>Surround yourself with positive, supportive people</li>
+                        <li>Remember that many successful people are shorter in stature</li>
+                        <li>Practice self-compassion and challenge negative self-talk</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Products Page -->
+    <div id="products" class="page">
+        <div class="container">
+            <div class="page-header">
+                <h2>Recommended Products</h2>
+                <p>Carefully selected items to enhance your daily life</p>
+            </div>
+
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">👞</div>
+                    <div class="product-info">
+                        <h3>Elevator Shoes</h3>
+                        <p>Discreet height-increasing shoes that add 2-4 inches while maintaining style and comfort. Perfect for professional settings.</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">📏</div>
+                    <div class="product-info">
+                        <h3>Height Insoles</h3>
+                        <p>Comfortable lift insoles that fit in any shoe. Adjustable heights available for different occasions.</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🪜</div>
+                    <div class="product-info">
+                        <h3>Folding Step Stool</h3>
+                        <p>Lightweight, portable step stool that's perfect for home, office, or travel. Non-slip surface for safety.</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">👕</div>
+                    <div class="product-info">
+                        <h3>Petite Clothing Lines</h3>
+                        <p>Brands specifically designed for shorter proportions with proper sleeve lengths, inseams, and torso fits.</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🚗</div>
+                    <div class="product-info">
+                        <h3>Seat Cushions</h3>
+                        <p>Ergonomic cushions that raise your seating position for better visibility while driving and improved posture.</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🏃</div>
+                    <div class="product-info">
+                        <h3>Petite Activewear</h3>
+                        <p>Athletic clothing designed for shorter frames with proper proportions for optimal performance and comfort.</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">💺</div>
+                    <div class="product-info">
+                        <h3>Ergonomic Footrests</h3>
+                        <p>Adjustable footrests for office chairs to ensure proper posture and reduce leg strain during work hours.</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🔧</div>
+                    <div class="product-info">
+                        <h3>Reach Extender Tools</h3>
+                        <p>Handy grabber tools for reaching high shelves without needing a step stool. Perfect for quick tasks.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Community Page -->
+    <div id="community" class="page">
+        <div class="container">
+            <div class="page-header">
+                <h2>Community & Stories</h2>
+                <p>You're not alone - join our supportive community</p>
+            </div>
+
+            <div class="community-section">
+                <h3>Success Stories</h3>
+                <div class="story-box">
+                    <h4>Sarah, 5'1" - Marketing Executive</h4>
+                    <p>"I used to feel invisible in meetings, but learning to project confidence through my voice and body language changed everything. Now I lead presentations for Fortune 500 companies and my height never crosses my mind."</p>
+                </div>
+                <div class="story-box">
+                    <h4>Michael, 5'4" - Entrepreneur</h4>
+                    <p>"Finding clothes that fit properly was a game-changer. Once I discovered brands made for my proportions and invested in tailoring, I felt so much more confident in business settings."</p>
+                </div>
+                <div class="story-box">
+                    <h4>Lisa, 4'11" - Software Engineer</h4>
+                    <p>"Setting up my home and workspace ergonomically made daily life so much easier. Small adjustments like a footrest at work and lower kitchen storage made a huge difference."</p>
+                </div>
+            </div>
+
+            <div class="community-section">
+                <h3>Join Our Community</h3>
+                <p>Connect with thousands of individuals who understand your experiences. Share advice, ask questions, and build lasting friendships with people who get it.</p>
+                <ul style="margin-top: 1rem; margin-left: 2rem;">
+                    <li>Monthly virtual meetups and discussion groups</li>
+                    <li>Private forum for sharing experiences and advice</li>
+                    <li>Expert Q&A sessions on fashion, confidence, and lifestyle</li>
+                    <li>Local chapter meetups in major cities worldwide</li>
+                    <li>Resource library with guides, videos, and articles</li>
+                </ul>
+            </div>
+
+            <div class="community-section">
+                <h3>Remember: Height Doesn't Define You</h3>
+                <p>Many of the world's most successful, confident, and admired people are shorter in stature. What matters is how you carry yourself, your character, your skills, and your confidence. Height is just one physical characteristic among thousands that make you uniquely you.</p>
+                <p style="margin-top: 1rem;">Famous shorter individuals include: Danny DeVito, Bruno Mars, Lady Gaga, Martin Luther King Jr., Mother Teresa, Pablo Picasso, and countless other leaders, artists, entrepreneurs, and changemakers who left their mark on the world.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contact" class="page">
+        <div class="container">
+            <div class="page-header">
+                <h2>Get In Touch</h2>
+                <p>We'd love to hear from you!</p>
+            </div>
+
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">📧</div>
+                        <div>
+                            <strong>Email</strong><br>
+                            info@heightadvantage.com<br>
+                            support@heightadvantage.com
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">📞</div>
+                        <div>
+                            <strong>Phone</strong><br>
+                            +1 (555) 123-4567<br>
+                            Mon-Fri: 9AM - 6PM EST
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">📍</div>
+                        <div>
+                            <strong>Address</strong><br>
+                            123 Confidence Boulevard<br>
+                            Suite 456, New York, NY 10001<br>
+                            United States
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">💬</div>
+                        <div>
+                            <strong>Social Media</strong><br>
+                            @HeightAdvantage on all platforms<br>
+                            Instagram | Facebook | Twitter | TikTok
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">⏰</div>
+                        <div>
+                            <strong>Business Hours</strong><br>
+                            Monday - Friday: 9:00 AM - 6:00 PM<br>
+                            Saturday: 10:00 AM - 4:00 PM<br>
+                            Sunday: Closed
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h3>Send Us a Message</h3>
+                    <form onsubmit="handleSubmit(event)">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Subject *</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Your Message *</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            alert('Thank you for your message! We will get back to you within 24-48 hours.');
+            event.target.reset();
+        }
+
+        // Smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+            });
+        });
+    </script>
+</body>
+</html>
